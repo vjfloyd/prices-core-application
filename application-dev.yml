@@ -1,0 +1,38 @@
+server:
+  port: 8081
+spring:
+  sql:
+   init:
+    mode: always
+  datasource:
+    url: jdbc:h2:mem:prices
+    username: sa
+    password: 1234
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console.enabled: true
+info:
+  app:
+    name: Prices search service
+    description: Api Prices
+    version: 1.0.0
+management:
+  endpoints:
+    web:
+      base-path: /prices-services/v1/products
+      path-mapping:
+        health: health-status
+  endpoint:
+    health:
+      show-details: always
+query:
+  search-prices: >
+                   SELECT brand_id, start_date, end_date,  price_list, product_id, priority, price, currency
+                   FROM prices  WHERE ? 
+                   BETWEEN start_date AND end_date 
+                   AND  product_id = ? AND brand_id = ?
+
+
