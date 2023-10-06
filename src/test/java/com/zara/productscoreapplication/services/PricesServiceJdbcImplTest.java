@@ -20,29 +20,37 @@ class PricesServiceJdbcImplTest {
     @Test
     void whenStartDateIs14_10_00H() {
         String date = "2020-06-14-10.00.00";
-        List<PricesResponse> prices = pricesServiceJdbcImpl.find(date, 35455L, 1L);
-        Assertions.assertEquals(prices.size(), 1);
+        PricesResponse price = pricesServiceJdbcImpl.find(date, 35455L, 1L);
+        Assertions.assertTrue(price.price().doubleValue() == 35.50);
     }
 
     @Test
     void whenStartDateIs14_16_00H() {
         String date = "2020-06-14-16.00.00";
-        List<PricesResponse> prices = pricesServiceJdbcImpl.find(date, 35455L, 1L);
-        Assertions.assertEquals(prices.size(), 2);
+        PricesResponse price = pricesServiceJdbcImpl.find(date, 35455L, 1L);
+        Assertions.assertEquals(price.price().doubleValue(), 25.45);
     }
+
+    @Test
+    void whenStartDateIs14_21_00H() {
+        String date = "2020-06-14-21.00.00";
+        PricesResponse price = pricesServiceJdbcImpl.find(date, 35455L, 1L);
+        Assertions.assertEquals(price.price().doubleValue(), 35.5);
+    }
+
 
     @Test
     void whenStartDateIs15_10_00H() {
         String date = "2020-06-15-10.00.00";
-        List<PricesResponse> prices = pricesServiceJdbcImpl.find(date, 35455L, 1L);
-        Assertions.assertEquals(prices.size(), 2);
+        PricesResponse price = pricesServiceJdbcImpl.find(date, 35455L, 1L);
+        Assertions.assertEquals(price.price().doubleValue(), 30.50);
     }
 
     @Test
     void whenStartDateIs16_21_00H() {
         String date = "2020-06-16-21.00.00";
-        List<PricesResponse> prices = pricesServiceJdbcImpl.find(date, 35455L, 1L);
-        Assertions.assertEquals(prices.size(), 2);
+        PricesResponse prices = pricesServiceJdbcImpl.find(date, 35455L, 1L);
+        Assertions.assertEquals(prices.price().doubleValue(), 38.95);
     }
 
 }

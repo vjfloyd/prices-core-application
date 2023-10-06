@@ -1,8 +1,8 @@
 package com.zara.productscoreapplication.resource.response;
 
 import lombok.Builder;
-import java.math.BigDecimal;
 
 @Builder
-public record PricesResponse (Long productId, BigDecimal price, String date, Integer priceList){
+public record PricesResponse (Long productId, Number price, String startDate,String endDate,
+                              Integer priceList, Long priority){
 }

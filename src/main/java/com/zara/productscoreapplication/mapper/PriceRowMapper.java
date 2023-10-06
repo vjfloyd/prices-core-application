@@ -18,6 +18,7 @@ public final class PriceRowMapper implements RowMapper<PricesEntity> {
                 .endDate(rs.getNString("end_date"))
                 .currency(rs.getNString("currency"))
                 .productId(rs.getLong("product_id"))
+                .priority(rs.getLong("priority"))
                 .build();
     }
 }

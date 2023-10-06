@@ -30,8 +30,10 @@ public class PricesEntity {
     @Column(name = "product_id")
     private Long productId;
     @Column(name = "price")
-    private BigDecimal price;
+    private Number price;
     @Column(name = "currency")
     private String currency;
+    @Column(name = "priority")
+    private Long priority;
 
 }

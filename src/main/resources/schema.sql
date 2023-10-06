@@ -6,7 +6,7 @@ CREATE TABLE PRICES (
     price_list  INTEGER NOT NULL,
     product_id  INTEGER NOT NULL,
     priority  INTEGER NOT NULL,
-    price  INTEGER NOT NULL,
+    price  NUMERIC(20,2) NOT NULL,
     currency  VARCHAR(128) NOT NULL,
     PRIMARY KEY (id)
 );

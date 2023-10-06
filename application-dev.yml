@@ -30,7 +30,7 @@ management:
       show-details: always
 query:
   search-prices: >
-                   SELECT brand_id, start_date, end_date,  price_list, product_id, priority, price, currency
+                   SELECT brand_id, start_date, end_date, priority, price_list, product_id, price, currency
                    FROM prices  WHERE ? 
                    BETWEEN start_date AND end_date 
                    AND  product_id = ? AND brand_id = ?

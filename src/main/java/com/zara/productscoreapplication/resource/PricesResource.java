@@ -23,7 +23,7 @@ public class PricesResource {
         this.pricesServiceJdbcImpl = pricesServiceJdbcImpl;
     }
     @GetMapping
-    public List<PricesResponse> getProducts(@Valid @RequestParam @NotBlank @Size(max = 19) String date,
+    public PricesResponse getProducts(@Valid @RequestParam @NotBlank @Size(max = 19) String date,
                                             @Valid @RequestParam @Positive Long productId,
                                             @Valid @RequestParam @Positive Long brandId){
         return pricesServiceJdbcImpl.find(date, productId, brandId);

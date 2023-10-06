@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Comparator;
+import java.util.Optional;
 
 @Service
 public final class PricesServiceJdbcImpl implements PricesService{
@@ -23,10 +24,12 @@ public final class PricesServiceJdbcImpl implements PricesService{
         this.sqlQuery = sqlQuery;
     }
 
-    public List<PricesResponse> find(String dateTime, Long productId, Long brandId) {
+    public PricesResponse find(String dateTime, Long productId, Long brandId) {
+      Optional<PricesEntity> prices = jdbcTemplate.query(sqlQuery,
+                    new Object[] { dateTime , productId, brandId}, new PriceRowMapper())
+              .stream()
+              .max(Comparator.comparing(PricesEntity::getPriority));
+      return priceResponseMapper.toPricesResponse(prices.get());
 
-      List<PricesEntity> prices = jdbcTemplate.query(sqlQuery,
-                    new Object[] { dateTime , productId, brandId}, new PriceRowMapper());
-      return priceResponseMapper.toPricesResponse(prices);
     }
 }
