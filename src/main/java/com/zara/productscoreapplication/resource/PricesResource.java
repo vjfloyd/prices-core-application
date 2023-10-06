@@ -16,14 +16,14 @@ import java.util.List;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/application-services/v1/products")
+@RequestMapping("/application-services/v1/prices")
 public class PricesResource {
     private PricesServiceJdbcImpl pricesServiceJdbcImpl;
     public PricesResource(PricesServiceJdbcImpl pricesServiceJdbcImpl) {
         this.pricesServiceJdbcImpl = pricesServiceJdbcImpl;
     }
     @GetMapping
-    public PricesResponse getProducts(@Valid @RequestParam @NotBlank @Size(max = 19) String date,
+    public PricesResponse finPrice(@Valid @RequestParam @NotBlank @Size(max = 19) String date,
                                             @Valid @RequestParam @Positive Long productId,
                                             @Valid @RequestParam @Positive Long brandId){
         return pricesServiceJdbcImpl.find(date, productId, brandId);
