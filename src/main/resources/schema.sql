@@ -10,3 +10,5 @@ CREATE TABLE PRICES (
     currency  VARCHAR(128) NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE INDEX index_product_id ON PRICES (product_id, brand_id);

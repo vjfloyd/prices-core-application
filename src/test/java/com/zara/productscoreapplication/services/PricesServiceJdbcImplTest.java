@@ -35,7 +35,7 @@ class PricesServiceJdbcImplTest {
     void whenStartDateIs14_21_00H() {
         String date = "2020-06-14-21.00.00";
         PricesResponse price = pricesServiceJdbcImpl.find(date, 35455L, 1L);
-        Assertions.assertEquals(price.price().doubleValue(), 35.5);
+        Assertions.assertEquals(price.price().doubleValue(), 35.50);
     }
 
 

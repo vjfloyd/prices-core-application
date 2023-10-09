@@ -25,11 +25,12 @@ public final class PricesServiceJdbcImpl implements PricesService{
     }
 
     public PricesResponse find(String dateTime, Long productId, Long brandId) {
-      Optional<PricesEntity> prices = jdbcTemplate.query(sqlQuery,
-                    new Object[] { dateTime , productId, brandId}, new PriceRowMapper())
+      PricesEntity prices = jdbcTemplate.query(sqlQuery,
+                    new Object[] { dateTime , dateTime, productId, brandId}, new PriceRowMapper())
               .stream()
-              .max(Comparator.comparing(PricesEntity::getPriority));
-      return priceResponseMapper.toPricesResponse(prices.get());
+              .max(Comparator.comparing(PricesEntity::getPriority))
+              .orElseThrow();
+      return priceResponseMapper.toPricesResponse(prices);
 
     }
 }
