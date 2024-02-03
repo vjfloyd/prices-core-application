@@ -1,4 +1,4 @@
-package com.zara.productscoreapplication.entity;
+package com.zara.productscoreapplication.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,13 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Table(name = "products")
-@Entity
+//@Table(name = "products")
+//@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PricesEntity {
+public class Prices {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

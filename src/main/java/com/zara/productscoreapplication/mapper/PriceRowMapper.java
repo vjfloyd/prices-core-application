@@ -1,16 +1,16 @@
 package com.zara.productscoreapplication.mapper;
 
 
-import com.zara.productscoreapplication.entity.PricesEntity;
+import com.zara.productscoreapplication.domain.Prices;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public final class PriceRowMapper implements RowMapper<PricesEntity> {
+public final class PriceRowMapper implements RowMapper<Prices> {
     @Override
-    public PricesEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return  PricesEntity.builder()
+    public Prices mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return  Prices.builder()
                 .brandId(rs.getNString("brand_id"))
                 .price(rs.getBigDecimal("price"))
                 .priceList(rs.getInt("price_list"))

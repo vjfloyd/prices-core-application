@@ -1,4 +1,4 @@
-package com.zara.productscoreapplication.resource.request;
+package com.zara.productscoreapplication.applicationxxx.request;
 
 import lombok.*;
 

@@ -1,36 +1,38 @@
 package com.zara.productscoreapplication.services;
 
-import com.zara.productscoreapplication.entity.PricesEntity;
+import com.zara.productscoreapplication.applicationxxx.ports.SearchPricesUseCase;
+import com.zara.productscoreapplication.domain.Prices;
 import com.zara.productscoreapplication.mapper.PriceResponseMapper;
 import com.zara.productscoreapplication.mapper.PriceRowMapper;
-import com.zara.productscoreapplication.resource.response.PricesResponse;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
-import java.util.Optional;
 
-@Service
-public final class PricesServiceJdbcImpl implements PricesService{
+@Slf4j
+public class PricesServiceJdbcImpl implements SearchPricesUseCase {
     private JdbcTemplate jdbcTemplate;
     private PriceResponseMapper priceResponseMapper;
     private String sqlQuery;
 
     public PricesServiceJdbcImpl(JdbcTemplate jdbcTemplate, PriceResponseMapper priceResponseMapper,
-                                  @Value("${query.search-prices}") String sqlQuery) {
+                                   String sqlQuery) {
         this.jdbcTemplate = jdbcTemplate;
         this.priceResponseMapper = priceResponseMapper;
         this.sqlQuery = sqlQuery;
     }
 
-    public PricesResponse find(String dateTime, Long productId, Long brandId) {
-      PricesEntity prices = jdbcTemplate.query(sqlQuery,
-                    new Object[] { dateTime , dateTime, productId, brandId}, new PriceRowMapper())
-              .stream()
-              .max(Comparator.comparing(PricesEntity::getPriority))
-              .orElseThrow();
-      return priceResponseMapper.toPricesResponse(prices);
+    @Override
+    public Prices searchPricesByParameter(String dateTime, Long productId, Long brandId) {
+        log.info("[searchPricesByParameter]");
 
+        Prices prices = jdbcTemplate.query(sqlQuery,
+                        new Object[] { dateTime , dateTime, productId, brandId}, new PriceRowMapper())
+                .stream()
+                .max(Comparator.comparing(Prices::getPriority))
+                .orElseThrow();
+        return  prices;
     }
+
+
 }

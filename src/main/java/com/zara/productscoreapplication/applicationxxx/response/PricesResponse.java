@@ -1,4 +1,4 @@
-package com.zara.productscoreapplication.resource.response;
+package com.zara.productscoreapplication.applicationxxx.response;
 
 import lombok.Builder;
 
